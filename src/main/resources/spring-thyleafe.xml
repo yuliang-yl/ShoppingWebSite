@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--1.扫描包-->
+    <context:component-scan base-package="com.yl"></context:component-scan>
+    <!--2.配置thymeleaf的模板解析器-->
+    <bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
+        <property name="prefix" value="/WEB-INF/demp/"></property>
+        <property name="suffix" value=".html"></property>
+        <property name="templateMode" value="HTML"></property>
+        <property name="cacheable" value="false"></property>
+        <property name="characterEncoding" value="UTF-8"></property>
+    </bean>
+    <!--3.模板引擎配置-->
+    <bean id="TemplateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+        <!--3.1使用模板解析器-->
+        <property name="templateResolver" ref="templateResolver"></property>
+    </bean>
+    <!--视图处理器-->
+    <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+        <!--4.1使用模板引擎-->
+        <property name="templateEngine" ref="TemplateEngine"></property>
+        <!--4.2指定编码格式-->
+        <property name="characterEncoding" value="UTF-8"></property>
+    </bean>
+</beans>

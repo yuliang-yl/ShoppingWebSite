@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+<h3>新增信息页面</h3>
+<form action="/insert" method="post">
+    <div class="form-group">
+        <label >编号</label>
+        <input type="text" class="form-control" name="product_id" >
+    </div>
+    <div class="form-group">
+        <label>商品名称</label>
+        <input type="text" class="form-control" name="product_name">
+    </div>
+    <div class="form-group">
+        <label>商品库存</label>
+        <input type="text" class="form-control" name="product_sum">
+    </div>
+    <div class="form-group">
+        <label>商品价格</label>
+        <input type="text" class="form-control" name="product_price">
+    </div>
+    <div class="form-group">
+        <label>商品状态</label>
+        <select name="statusId" class="form-control">
+            <option th:each="sta:${list2}" th:text="${sta.status_id}" th:value="${sta.status_id}"></option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">新增</button>
+</form>
+</body>
+</html>

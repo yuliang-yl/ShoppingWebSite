@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand"><h2>检索信息</h2></a>
+    <form class="form-inline" action="/demo" method="post">
+        商品状态 : &nbsp;&nbsp;&nbsp;
+        <select class="form-control mr-sm-2" name="statusId">
+            <option value="0">请选择</option>
+            <option th:each="sta:${list2}" th:text="${sta.status_name}"  th:value="${sta.status_id}"></option>
+        </select>&nbsp;&nbsp;&nbsp;&nbsp;
+        商品名称 : &nbsp;&nbsp;&nbsp;
+        <input class="form-control mr-sm-2" name="productName"  type="search" placeholder="ProductName" aria-label="Search">
+        &nbsp;&nbsp; <button class="btn btn-success my-2 my-sm-0" type="submit">检索</button>
+    </form>
+</nav>
+<table class="table table-hover">
+    <thead class="thead-dark">
+    <tr align="center">
+
+        <th scope="col">商品名称</th>
+        <th scope="col">商品库存</th>
+        <th scope="col">商品价格</th>
+        <th scope="col">商品状态</th>
+        <th scope="col">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pro:${list}" align="center">
+        <th th:text="${pro.product_id}" scope="row"></th>
+        <td th:text="${pro.product_name}"></td>
+        <td th:text="${pro.product_sum}"></td>
+        <td th:text="${pro.product_price}"></td>
+        <td th:text="${pro.status_id.status_name}"></td>
+        <td>
+            <a th:href="@{/findbyid(id=${pro.product_id})}" >
+                <button type="button" class="btn btn-primary btn-sm" >修改</button>
+            </a>
+            <a th:href="@{/delete(id=${pro.product_id})}"  onclick="return confirm('确定要删除吗？')">
+                <button type="button" class="btn btn-danger btn-sm" >删除</button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/toinsert">
+    <button type="button" class="btn btn-info">新增信息</button>
+</a>
+</body>
+</html>
